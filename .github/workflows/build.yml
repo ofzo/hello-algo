@@ -33,3 +33,5 @@ jobs:
           committer_name: GitHub Actions
           committer_email: 41898282+github-actions[bot]@users.noreply.github.com
           push: origin release --force
+      - name: Release vercel
+        run: https://api.vercel.com/v1/integrations/deploy/${{vars.VERCEL_DEPOLY}}/txLWslNbTF
