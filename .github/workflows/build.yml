@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 9 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.9.0]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PUSH_TOKEN }}
+      - name: Install dependence
+        run: pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+      - name: Install
+        run: pip install -i https://pypi.tuna.tsinghua.edu.cn/simple mkdocs-material==9.4.1 mkdocs-glightbox
+
+      - name: Generate page
+        run: mkdir -p app && cp -r docs app/build && cp mkdocs.yml app/mkdocs.yml && cd app && mkdocs build
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: app/*
+          new_branch: release
+          message: build by github action
+          committer_name: GitHub Actions
+          committer_email: 41898282+github-actions[bot]@users.noreply.github.com
+          push: origin release --force
