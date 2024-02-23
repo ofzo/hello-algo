@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.PUSH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install dependence
         run: pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
       - name: Install
@@ -34,4 +34,4 @@ jobs:
           committer_email: 41898282+github-actions[bot]@users.noreply.github.com
           push: origin release --force
       - name: Release vercel
-        run: https://api.vercel.com/v1/integrations/deploy/${{vars.VERCEL_DEPOLY}}/txLWslNbTF
+        run: https://api.vercel.com/v1/integrations/deploy/${{secrets.VERCEL_DEPOLY}}/txLWslNbTF

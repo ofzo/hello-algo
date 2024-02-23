@@ -16,7 +16,7 @@ function recur(n: number): number {
 
 /* 使用迭代模拟递归 */
 function forLoopRecur(n: number): number {
-    // 使用一个显式的栈来模拟系统调用栈 
+    // 使用一个显式的栈来模拟系统调用栈
     const stack: number[] = [];
     let res: number = 0;
     // 递：递归调用
@@ -25,7 +25,7 @@ function forLoopRecur(n: number): number {
         stack.push(i);
     }
     // 归：返回结果
-    while (stack.length) { 
+    while (stack.length) {
         // 通过“出栈操作”模拟“归”
         res += stack.pop();
     }
